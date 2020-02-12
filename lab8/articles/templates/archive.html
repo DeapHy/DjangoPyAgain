@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+    
+    <div id='user'>
+      {% if request.user.is_authenticated %}
+        User Info: <br>
+        Login: {{ user.username }} <br>
+        E-mail: {{ user.email }}
+      {% endif %}
+    </div>
+    <div id="navbar-center">
+      <img class="logo" src="static/trex.png">
+    </div>
+    <div class="archive">
+      {% for post in posts %}
+
+      <div class="one-post">
+        <div class="one-post-shadow">e</div>
+        <button class="fold-button">Свернуть</button>
+        <a href='/article/{{ post.id }}'><h2 class="post-title">{{ post.title }}</h2></a>
+        <div class="article-info">
+          <div class="article-author">{{ post.author.username }}</div>
+          <div class="article-created-date">{{ post.created_date }}</div>
+        </div>
+        <p class="article-text">{{ post.get_excerpt }}</p>
+
+      </div>
+    <hr>
+    {% endfor %}
+    </div>
+{% endblock %}
